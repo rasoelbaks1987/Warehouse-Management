@@ -1,0 +1,1926 @@
+<!-- ABI WAREHOUSE CONSOLE – WIX EMBED VERSION (UPDATED LABEL + POD) -->
+<div id="abi-warehouse-console-root"></div>
+
+<style>
+  :root {
+    --bg: #050814;
+    --bg-elevated: #111827;
+    --bg-sidebar: #060b18;
+    --accent: #34d399;
+    --accent-soft: rgba(52, 211, 153, 0.15);
+    --accent-strong: #22c55e;
+    --accent-info: #38bdf8;
+    --accent-danger: #f97373;
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --text-main: #f9fafb;
+    --text-muted: #9ca3af;
+    --text-soft: #6b7280;
+    --nav-width: 260px;
+    --radius-xl: 24px;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-pill: 999px;
+    --label-bg: #f9fafb;
+    --label-border: #111827;
+    --label-text: #111827;
+  }
+
+  .abi-light-theme {
+    --bg: #e5e7eb;
+    --bg-elevated: #ffffff;
+    --bg-sidebar: #ffffff;
+    --border-subtle: rgba(15, 23, 42, 0.08);
+    --text-main: #020617;
+    --text-muted: #4b5563;
+    --text-soft: #6b7280;
+    --label-bg: #ffffff;
+    --label-border: #111827;
+    --label-text: #020617;
+  }
+
+  #abi-warehouse-console-root * {
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  }
+
+  #abi-warehouse-console-root {
+    margin: 0;
+    width: 100%;
+    min-height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .abi-app-shell {
+    width: 100%;
+    max-width: 1400px;
+    margin: 12px;
+    border-radius: 32px;
+    background: radial-gradient(circle at top left, #1f2937 0, #020617 45%, #000 90%);
+    color: var(--text-main);
+    display: grid;
+    grid-template-columns: var(--nav-width) minmax(0, 1fr);
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.65);
+  }
+
+  .abi-sidebar {
+    background: radial-gradient(circle at top left, #1e293b 0, #020617 55%);
+    padding: 18px 14px 60px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(148, 163, 184, 0.25);
+  }
+
+  .abi-brand-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), #020617);
+    border-radius: 999px;
+    padding: 8px 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .abi-brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, #f9fafb 0, #e5e7eb 35%, #9ca3af 60%, #020617 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .abi-brand-logo img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+  }
+
+  .abi-brand-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .abi-brand-title {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #e5e7eb;
+    font-weight: 700;
+  }
+
+  .abi-brand-subtitle {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .abi-nav-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    margin: 7px 2px 8px;
+  }
+
+  .abi-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .abi-nav-btn {
+    width: 100%;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    color: #ffffff !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 11px;
+    font-size: 13px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.18s ease-out;
+    text-align: left;
+  }
+
+  .abi-nav-btn span {
+    color: #ffffff !important;
+  }
+
+  .abi-nav-btn-pill {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    flex-shrink: 0;
+  }
+
+  .abi-nav-btn.abi-active {
+    background: radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.35) 0, rgba(15, 23, 42, 0.95) 40%);
+    color: #ffffff !important;
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.35);
+  }
+
+  .abi-nav-btn.abi-active .abi-nav-btn-pill {
+    background: radial-gradient(circle at 30% 0, #bbf7d0 0, #16a34a 45%, #052e16 100%);
+    border-color: rgba(34, 197, 94, 0.9);
+    color: #ecfdf5;
+  }
+
+  .abi-nav-btn:hover:not(.abi-active) {
+    background: rgba(15, 23, 42, 0.92);
+    color: #ffffff !important;
+  }
+
+  .abi-sidebar-footer {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(148, 163, 184, 0.5);
+    font-size: 11px;
+    color: #ffffff;
+  }
+
+  .abi-main {
+    padding: 18px 18px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9) 0, #020617 45%, #000 100%);
+    position: relative;
+  }
+
+  .abi-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .abi-premium-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.3) 0, rgba(15, 23, 42, 0.95) 40%);
+    border: 1px solid rgba(34, 197, 94, 0.65);
+    font-size: 12px;
+    color: #bbf7d0;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    box-shadow: 0 0 24px rgba(34, 197, 94, 0.55);
+  }
+
+  .abi-premium-banner .abi-star {
+    font-size: 16px;
+    filter: drop-shadow(0 0 6px rgba(252, 211, 77, 0.9));
+    animation: abiStarPulse 1.6s ease-in-out infinite;
+  }
+
+  .abi-premium-banner strong {
+    color: #ecfdf5;
+  }
+
+  .abi-slogan {
+    font-size: 13px;
+    color: #ffffff;
+    margin-top: 4px;
+    letter-spacing: 0.12em;
+    animation: abiSloganFlash 2.2s ease-in-out infinite;
+  }
+
+  .abi-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .abi-toggle-theme {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background: rgba(15, 23, 42, 0.9);
+    color: #ffffff;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .abi-toggle-knob {
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, #fde68a 0, #f97316 40%, #7c2d12 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.95);
+    transition: 0.25s ease-out;
+  }
+
+  .abi-light-theme .abi-toggle-knob {
+    transform: translateX(10px) rotate(180deg);
+    background: radial-gradient(circle at 30% 30, #e5e7eb 0, #9ca3af 38%, #020617 100%);
+    box-shadow: 0 0 10px rgba(148, 163, 184, 0.7);
+  }
+
+  .abi-refresh {
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    padding: 6px 14px;
+    font-size: 12px;
+    background: rgba(15, 23, 42, 0.96);
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  .abi-content-header {
+    margin-top: 8px;
+    margin-bottom: 6px;
+  }
+
+  .abi-content-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff !important;
+  }
+
+  .abi-content-subtitle {
+    font-size: 12px;
+    color: #ffffff !important;
+  }
+
+  .abi-chip-row {
+    margin-top: 6px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 11px;
+  }
+
+  .abi-chip {
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(15, 23, 42, 0.85);
+    color: #ffffff;
+  }
+
+  .abi-body-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .abi-row-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .abi-row-3-2 {
+    display: grid;
+    grid-template-columns: 1.2fr 1.2fr 0.9fr;
+    gap: 8px;
+  }
+
+  .abi-card {
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), #020617);
+    border-radius: var(--radius-lg);
+    padding: 10px 12px;
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    position: relative;
+  }
+
+  .abi-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .abi-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .abi-card-sub {
+    font-size: 11px;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+  }
+
+  .abi-kpi {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .abi-kpi-note {
+    font-size: 11px;
+    color: var(--text-soft);
+  }
+
+  .abi-chart-placeholder {
+    position: relative;
+    height: 180px;
+    border-radius: var(--radius-md);
+    border: 1px dashed rgba(148, 163, 184, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+  }
+
+  .abi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    color: #ffffff;
+  }
+
+  .abi-table th,
+  .abi-table td {
+    padding: 6px 6px;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.6);
+  }
+
+  .abi-table th {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 10px;
+    color: #ffffff !important;
+    text-align: left;
+  }
+
+  .abi-table tbody tr:hover {
+    background: rgba(15, 23, 42, 0.85);
+  }
+
+  .abi-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    font-size: 10px;
+  }
+
+  .abi-badge-air {border-color: var(--accent-info); color: #bae6fd;}
+  .abi-badge-ocean {border-color:#38bdf8;color:#e0f2fe;}
+  .abi-badge-land {border-color:#f97316;color:#fed7aa;}
+  .abi-badge-vip {border-color:#facc15;color:#fef9c3;}
+  .abi-badge-prio {border-color:#fb7185;color:#ffe4e6;}
+  .abi-badge-ok {border-color:var(--accent);color:#bbf7d0;}
+
+  .abi-form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .abi-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+  }
+
+  .abi-field label {
+    color: #ffffff;
+  }
+
+  .abi-field input,
+  .abi-field select,
+  .abi-field textarea {
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background: rgba(15, 23, 42, 0.95);
+    color: #ffffff;
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .abi-light-theme .abi-field input,
+  .abi-light-theme .abi-field select,
+  .abi-light-theme .abi-field textarea {
+    background: rgba(249, 250, 251, 0.98);
+    color: #020617;
+  }
+
+  .abi-field textarea {min-height:40px;resize:vertical;}
+
+  .abi-btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .abi-btn {
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.65);
+    padding: 6px 13px;
+    font-size: 12px;
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(15, 23, 42, 0.96);
+    color: #ffffff;
+  }
+  .abi-btn-primary {
+    background: radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.5) 0, #16a34a 50%, #052e16 100%);
+    border-color: rgba(22, 163, 74, 0.95);
+  }
+  .abi-btn-ghost {
+    background: transparent;
+    border-style: dashed;
+  }
+  .abi-btn-small {padding:4px 10px;font-size:11px;}
+
+  .abi-icon-btn {
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,0.55);
+    background: rgba(15,23,42,0.96);
+    color: #ffffff;
+    width:22px;
+    height:22px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    cursor:pointer;
+  }
+  .abi-icon-btn-danger {
+    border-color:rgba(248,113,113,0.75);
+    color:#fecaca;
+  }
+
+  .abi-tab-panel {display:none;}
+  .abi-tab-panel.abi-active {display:block;}
+
+  .abi-modal-backdrop {
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,0.75);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+  }
+  .abi-modal-backdrop.abi-visible {display:flex;}
+
+  .abi-label-modal {
+    width:360px;
+    background:var(--bg-elevated);
+    border-radius:18px;
+    padding:10px 10px 14px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.8);
+  }
+
+  .abi-label-sheet {
+    background:var(--label-bg);
+    color:var(--label-text);
+    border-radius:14px;
+    border:2px solid var(--label-border);
+    padding:12px;
+    font-size:11px;
+  }
+
+  .abi-label-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:6px;
+  }
+
+  .abi-label-header-left {
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    font-size:11px;
+    text-align:center;
+    align-items:center;
+  }
+
+  .abi-label-logo {
+    width:82px;
+    height:38px;
+    object-fit:contain;
+  }
+
+  .abi-label-section-title {
+    font-weight:700;
+    font-size:11px;
+    margin-top:6px;
+    margin-bottom:4px;
+    border-top:1px solid #d4d4d8;
+    padding-top:3px;
+  }
+
+  .abi-label-table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:10px;
+  }
+
+  .abi-label-table td {
+    border:1px solid #d4d4d8;
+    padding:2px 4px;
+  }
+
+  .abi-label-tracking {
+    text-align:center;
+    margin-top:4px;
+    font-weight:700;
+    letter-spacing:0.25em;
+  }
+
+  .abi-label-footer {
+    text-align:center;
+    margin-top:4px;
+    font-size:10px;
+  }
+
+  .abi-modal-actions {
+    display:flex;
+    justify-content:space-between;
+    margin-top:8px;
+  }
+
+  .abi-pod-sheet {
+    background:#ffffff;
+    color:#020617;
+    padding:10px;
+    border-radius:12px;
+    border:1px solid #111827;
+    font-size:11px;
+  }
+  .abi-pod-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:6px;
+  }
+  .abi-pod-logo {
+    width:70px;
+    height:35px;
+    object-fit:contain;
+  }
+  .abi-pod-title {
+    font-size:13px;
+    font-weight:700;
+  }
+  .abi-pod-table {
+    width:100%;
+    border-collapse:collapse;
+    font-size:10px;
+  }
+  .abi-pod-table th,
+  .abi-pod-table td {
+    border:1px solid #111827;
+    padding:3px 4px;
+  }
+
+  .abi-ticker {
+    margin-top:8px;
+    border-radius:999px;
+    border:1px solid rgba(148,163,184,0.45);
+    background:rgba(15,23,42,0.95);
+    overflow:hidden;
+    height:28px;
+    position:relative;
+  }
+  .abi-ticker-inner {
+    position:absolute;
+    white-space:nowrap;
+    will-change:transform;
+    animation:abiTickerScroll 18s linear infinite;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    color:#e5e7eb;
+    padding-left:100%;
+  }
+
+  @keyframes abiStarPulse {
+    0%,100% {transform:scale(1);opacity:1;}
+    50% {transform:scale(1.2);opacity:0.7;}
+  }
+  @keyframes abiSloganFlash {
+    0%,100% {opacity:0.55;}
+    50% {opacity:1;}
+  }
+  @keyframes abiTickerScroll {
+    0% {transform:translateX(0);}
+    100% {transform:translateX(-100%);}
+  }
+
+  @media (max-width: 900px) {
+    .abi-app-shell {grid-template-columns:minmax(0,1fr);}
+    .abi-sidebar {display:none;}
+  }
+</style>
+
+<!-- QR & BARCODE LIBS -->
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<!-- CHART.JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+(function () {
+  const root = document.getElementById('abi-warehouse-console-root');
+
+  const app = document.createElement('div');
+  app.className = 'abi-app-shell';
+  app.innerHTML = `
+    <div class="abi-sidebar">
+      <div class="abi-brand-block">
+        <div class="abi-brand-logo">
+          <img src="https://static.wixstatic.com/media/400daf_9401f2cc240047f985346922a9f6ef8d~mv2.png" alt="ABI logo">
+        </div>
+        <div class="abi-brand-meta">
+          <div class="abi-brand-title">ABI WAREHOUSE CONSOLE</div>
+          <div class="abi-brand-subtitle">End-to-end package receiving · sending · POD</div>
+        </div>
+      </div>
+
+      <div class="abi-nav-label">NAVIGATION</div>
+      <ul class="abi-nav-list">
+        <li><button class="abi-nav-btn abi-active" data-tab="dashboard"><div class="abi-nav-btn-pill">📊</div><span>Dashboard</span></button></li>
+        <li><button class="abi-nav-btn" data-tab="customers"><div class="abi-nav-btn-pill">👥</div><span>Customers</span></button></li>
+        <li><button class="abi-nav-btn" data-tab="receiving"><div class="abi-nav-btn-pill">📥</div><span>Receiving</span></button></li>
+        <li><button class="abi-nav-btn" data-tab="sending"><div class="abi-nav-btn-pill">🚚</div><span>Sending & Labels</span></button></li>
+        <li><button class="abi-nav-btn" data-tab="pod"><div class="abi-nav-btn-pill">✍️</div><span>POD</span></button></li>
+        <li><button class="abi-nav-btn" data-tab="archive"><div class="abi-nav-btn-pill">📁</div><span>Delivered Archive</span></button></li>
+        <li><button class="abi-nav-btn" data-tab="tracker"><div class="abi-nav-btn-pill">🔍</div><span>ABI Tracker</span></button></li>
+      </ul>
+
+      <div class="abi-sidebar-footer">
+        <div>🛍️ SHOP · ✈️ SHIP · 🚚 DELIVER!</div>
+        <div>ABI LOGISTIC SERVICES LLC</div>
+      </div>
+    </div>
+
+    <div class="abi-main">
+      <div class="abi-top-bar">
+        <div>
+          <div class="abi-premium-banner">
+            <span class="abi-star">⭐</span>
+            <span>Premium · Designed &amp; Developed by: <strong>ABI LOGISTIC SERVICES LLC.</strong></span>
+          </div>
+          <div class="abi-slogan">Efficiency Delivered, Success Achieved!</div>
+        </div>
+        <div class="abi-top-actions">
+          <button class="abi-toggle-theme" id="abiToggleTheme">
+            <span>Light / Dark</span>
+            <span class="abi-toggle-knob">☀️</span>
+          </button>
+          <button class="abi-refresh" id="abiRefreshBtn">⟳ Refresh</button>
+        </div>
+      </div>
+
+      <div class="abi-content-header">
+        <div class="abi-content-title" id="abiContentTitle">Live Warehouse Dashboard</div>
+        <div class="abi-content-subtitle" id="abiContentSubtitle">Overview of packages, customers, and activity.</div>
+        <div class="abi-chip-row">
+          <div class="abi-chip">📦 Packages Received: <span id="abiKpiReceived">0</span></div>
+          <div class="abi-chip">🚚 In Transit: <span id="abiKpiTransit">0</span></div>
+          <div class="abi-chip">✅ Delivered: <span id="abiKpiDelivered">0</span></div>
+          <div class="abi-chip">👥 Active Customers: <span id="abiKpiCustomers">0</span></div>
+        </div>
+      </div>
+
+      <div class="abi-body-grid">
+
+        <!-- DASHBOARD TAB -->
+        <div class="abi-tab-panel abi-active" data-tab="dashboard">
+          <div class="abi-row-3">
+            <div class="abi-card">
+              <div class="abi-card-header">
+                <div class="abi-card-title">Packages Received</div>
+              </div>
+              <div class="abi-kpi" id="abiCardReceived">0</div>
+              <div class="abi-kpi-note">Warehouse + Transit</div>
+            </div>
+            <div class="abi-card">
+              <div class="abi-card-header">
+                <div class="abi-card-title">In Transit</div>
+              </div>
+              <div class="abi-kpi" id="abiCardTransit">0</div>
+              <div class="abi-kpi-note">Ready for delivery</div>
+            </div>
+            <div class="abi-card">
+              <div class="abi-card-header">
+                <div class="abi-card-title">Delivered (Archive)</div>
+              </div>
+              <div class="abi-kpi" id="abiCardDelivered">0</div>
+              <div class="abi-kpi-note">Stored & billed</div>
+            </div>
+          </div>
+
+          <div class="abi-row-3-2" style="margin-top:8px;">
+            <div class="abi-card">
+              <div class="abi-card-header">
+                <div class="abi-card-title">Packages Status Overview</div>
+              </div>
+              <div class="abi-chart-placeholder">
+                <canvas id="abiPackagesChart"></canvas>
+              </div>
+            </div>
+            <div class="abi-card">
+              <div class="abi-card-header">
+                <div class="abi-card-title">Freight Mix</div>
+              </div>
+              <div class="abi-chart-placeholder">
+                <canvas id="abiMixChart"></canvas>
+              </div>
+            </div>
+            <div class="abi-card">
+              <div class="abi-card-header">
+                <div class="abi-card-title">Recent Activity</div>
+              </div>
+              <table class="abi-table" id="abiActivityTable">
+                <thead><tr><th>Time</th><th>Event</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- CUSTOMERS TAB -->
+        <div class="abi-tab-panel" data-tab="customers">
+          <div class="abi-card">
+            <div class="abi-card-header">
+              <div class="abi-card-title">Customer Registry</div>
+            </div>
+            <div class="abi-form-grid">
+              <div class="abi-field">
+                <label>Customer ID (auto)</label>
+                <input id="cId" placeholder="AUTO" disabled>
+              </div>
+              <div class="abi-field">
+                <label>Name</label>
+                <input id="cName" placeholder="Customer Name">
+              </div>
+              <div class="abi-field">
+                <label>Type</label>
+                <select id="cType">
+                  <option value="Regular">Regular</option>
+                  <option value="VIP">VIP</option>
+                  <option value="Corporate">Corporate</option>
+                </select>
+              </div>
+              <div class="abi-field">
+                <label>Phone</label>
+                <input id="cPhone" placeholder="+1 ...">
+              </div>
+              <div class="abi-field">
+                <label>Email</label>
+                <input id="cEmail" placeholder="name@example.com">
+              </div>
+              <div class="abi-field">
+                <label>Address</label>
+                <input id="cAddress" placeholder="Customer address">
+              </div>
+              <div class="abi-field">
+                <label>City</label>
+                <input id="cCity" placeholder="City">
+              </div>
+              <div class="abi-field">
+                <label>Notes</label>
+                <textarea id="cNotes" rows="1"></textarea>
+              </div>
+            </div>
+            <div class="abi-btn-row">
+              <button class="abi-btn abi-btn-primary" id="cSave"><span>💾</span>Save</button>
+              <button class="abi-btn" id="cNew"><span>🆕</span>New</button>
+              <button class="abi-btn abi-btn-ghost" id="cDelete"><span>🗑️</span>Delete</button>
+            </div>
+            <table class="abi-table" id="customersTable">
+              <thead><tr><th>ID</th><th>Name</th><th>Type</th><th>City</th><th>Actions</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- RECEIVING TAB -->
+        <div class="abi-tab-panel" data-tab="receiving">
+          <div class="abi-card">
+            <div class="abi-card-header">
+              <div class="abi-card-title">Receive Package</div>
+            </div>
+            <div class="abi-form-grid">
+              <div class="abi-field">
+                <label>Customer</label>
+                <select id="rCustomer"></select>
+              </div>
+              <div class="abi-field">
+                <label>External Tracking #</label>
+                <input id="rExt" placeholder="Scan or type">
+              </div>
+              <div class="abi-field">
+                <label>ABI Tracking # (auto)</label>
+                <input id="rAbi" disabled placeholder="ABI00001">
+              </div>
+              <div class="abi-field">
+                <label>Freight Type</label>
+                <select id="rFreight">
+                  <option value="AIR">AIR</option>
+                  <option value="OCEAN">OCEAN</option>
+                  <option value="LAND">LAND</option>
+                </select>
+              </div>
+              <div class="abi-field">
+                <label>Service Type</label>
+                <select id="rService">
+                  <option value="SNABB">SNABB</option>
+                  <option value="CREW">CREW</option>
+                  <option value="PRIO">PRIO</option>
+                  <option value="PESS">PESS</option>
+                </select>
+              </div>
+              <div class="abi-field">
+                <label>Status</label>
+                <select id="rStatus">
+                  <option value="Warehouse">Received Warehouse</option>
+                  <option value="Transit">Transit</option>
+                </select>
+              </div>
+              <div class="abi-field">
+                <label>Weight (LBS)</label>
+                <input id="rWeight" type="number" min="0" step="0.01">
+              </div>
+              <div class="abi-field">
+                <label>Box #</label>
+                <input id="rBox" placeholder="Box 1 of 1">
+              </div>
+              <div class="abi-field">
+                <label>Dimensions (LxWxH)</label>
+                <input id="rDims" placeholder="inches, e.g. 10x10x10">
+              </div>
+              <div class="abi-field">
+                <label>Auto CFT</label>
+                <input id="rCft" disabled>
+              </div>
+              <div class="abi-field">
+                <label>Internal Notes</label>
+                <textarea id="rNotes" rows="1"></textarea>
+              </div>
+            </div>
+            <div class="abi-btn-row">
+              <button class="abi-btn abi-btn-primary" id="rSave"><span>📥</span>Save</button>
+              <button class="abi-btn" id="rNew"><span>🆕</span>New</button>
+              <button class="abi-btn abi-btn-ghost" id="rDelete"><span>🗑️</span>Delete</button>
+            </div>
+            <table class="abi-table" id="receivingTable">
+              <thead><tr><th></th><th>ABI</th><th>Customer</th><th>Ext #</th><th>Freight</th><th>Service</th><th>Status</th><th>LBS</th><th>CFT</th><th>Actions</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SENDING & LABELS TAB -->
+        <div class="abi-tab-panel" data-tab="sending">
+          <div class="abi-card">
+            <div class="abi-card-header">
+              <div class="abi-card-title">Sending & Labels</div>
+            </div>
+            <div class="abi-form-grid">
+              <div class="abi-field">
+                <label>Customer Filter</label>
+                <select id="sCustomer"></select>
+              </div>
+              <div class="abi-field">
+                <label>Freight Filter</label>
+                <select id="sFreightFilter">
+                  <option value="">All</option>
+                  <option value="AIR">AIR</option>
+                  <option value="OCEAN">OCEAN</option>
+                  <option value="LAND">LAND</option>
+                </select>
+              </div>
+              <div class="abi-field">
+                <label>Service Filter</label>
+                <select id="sServiceFilter">
+                  <option value="">All</option>
+                  <option value="SNABB">SNABB</option>
+                  <option value="CREW">CREW</option>
+                  <option value="PRIO">PRIO</option>
+                  <option value="PESS">PESS</option>
+                </select>
+              </div>
+            </div>
+            <div class="abi-btn-row">
+              <button class="abi-btn abi-btn-primary abi-btn-small" id="sMarkTransit">🚚 Mark as In Transit</button>
+              <button class="abi-btn abi-btn-small" id="sMarkDelivered">✅ Mark as Delivered</button>
+              <button class="abi-btn abi-btn-small" id="sPrintSelectedLabels">🖨️ Print Selected Labels</button>
+            </div>
+            <table class="abi-table" id="sendingTable">
+              <thead><tr><th></th><th>ABI</th><th>Customer</th><th>Freight</th><th>Service</th><th>Status</th><th>LBS</th><th>CFT</th><th>Label</th><th>Actions</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- POD TAB -->
+        <div class="abi-tab-panel" data-tab="pod">
+          <div class="abi-card">
+            <div class="abi-card-header">
+              <div class="abi-card-title">POD (Proof Of Delivery)</div>
+            </div>
+            <div class="abi-form-grid">
+              <div class="abi-field">
+                <label>Customer</label>
+                <select id="pCustomer"></select>
+              </div>
+              <div class="abi-field">
+                <label>Service Type</label>
+                <select id="pService">
+                  <option value="">All</option>
+                  <option value="SNABB">SNABB</option>
+                  <option value="CREW">CREW</option>
+                  <option value="PRIO">PRIO</option>
+                  <option value="PESS">PESS</option>
+                </select>
+              </div>
+            </div>
+            <div class="abi-btn-row">
+              <button class="abi-btn abi-btn-primary abi-btn-small" id="pPrintPod">🖨️ Print POD</button>
+            </div>
+            <table class="abi-table" id="podTable">
+              <thead><tr><th></th><th>ABI</th><th>Freight</th><th>Service</th><th>LBS</th><th>CFT</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ARCHIVE TAB -->
+        <div class="abi-tab-panel" data-tab="archive">
+          <div class="abi-card">
+            <div class="abi-card-header">
+              <div class="abi-card-title">Delivered Archive</div>
+            </div>
+            <table class="abi-table" id="archiveTable">
+              <thead><tr><th>ABI</th><th>Customer</th><th>Freight</th><th>Service</th><th>LBS</th><th>CFT</th><th>Delivered On</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TRACKER TAB -->
+        <div class="abi-tab-panel" data-tab="tracker">
+          <div class="abi-card">
+            <div class="abi-card-header">
+              <div class="abi-card-title">ABI Tracker</div>
+            </div>
+            <div class="abi-form-grid">
+              <div class="abi-field">
+                <label>Search (ABI / External / Name)</label>
+                <input id="tQuery" placeholder="Type and hit Enter">
+              </div>
+            </div>
+            <table class="abi-table" id="trackerTable">
+              <thead><tr><th>ABI</th><th>Customer</th><th>Ext #</th><th>Freight</th><th>Service</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="abi-ticker">
+        <div class="abi-ticker-inner">
+          📦 LIVE SYSTEM · ABI LOGISTIC SERVICES LLC · Efficiency Delivered, Success Achieved! · 🛍️ SHOP · ✈️ SHIP · 🚚 DELIVER! ·
+        </div>
+      </div>
+    </div>
+
+    <!-- LABEL MODAL -->
+    <div class="abi-modal-backdrop" id="abiLabelModalBackdrop">
+      <div class="abi-label-modal">
+        <div class="abi-label-sheet" id="abiLabelSheet">
+          <div class="abi-label-header">
+            <div class="abi-label-header-left">
+              <img class="abi-label-logo" src="https://static.wixstatic.com/media/400daf_9401f2cc240047f985346922a9f6ef8d~mv2.png" alt="ABI logo">
+              <strong>ABI LOGISTIC SERVICES LLC</strong>
+              <span>12848 SW 12 TER · Miami FL 33184</span>
+              <span>📞 (305) 848-9855 · ✉️ info@abi-logistics.com</span>
+              <span>🌐 www.abi-logistics.com</span>
+            </div>
+            <div>
+              <canvas id="abiLabelQr" width="80" height="80"></canvas>
+            </div>
+          </div>
+
+          <div class="abi-label-section-title">SHIPMENT DETAILS</div>
+          <table class="abi-label-table">
+            <tbody>
+              <tr><td>Label Type</td><td id="lblType"></td></tr>
+              <tr><td>Destination</td><td id="lblDest"></td></tr>
+              <tr><td>Customer</td><td id="lblCust"></td></tr>
+              <tr><td>Customer Address</td><td id="lblAddress"></td></tr>
+              <tr><td>Weight / CFT</td><td id="lblWeight"></td></tr>
+              <tr><td>Box #</td><td id="lblBox"></td></tr>
+              <tr><td>Created By</td><td>ABI Warehouse Console</td></tr>
+            </tbody>
+          </table>
+
+          <div class="abi-label-tracking" id="lblAbiCode"></div>
+
+          <div style="text-align:center;margin-top:4px;">
+            <span>Follow us on </span>📘 📸 🎵
+          </div>
+
+          <div style="text-align:center;margin-top:4px;">
+            <svg id="abiLabelBarcode" jsbarcode-format="code128" jsbarcode-value="ABI000001" jsbarcode-margin="0" jsbarcode-height="40"></svg>
+          </div>
+          <div style="text-align:center;font-size:10px;margin-top:2px;" id="lblAbiText"></div>
+
+          <div class="abi-label-footer">
+            🛍️ SHOP · ✈️ SHIP · 🚚 DELIVER!
+          </div>
+        </div>
+
+        <div class="abi-modal-actions">
+          <button class="abi-btn abi-btn-small" id="abiLabelClose">✖ Close</button>
+          <button class="abi-btn abi-btn-primary abi-btn-small" id="abiLabelPrint">🖨️ Print Label</button>
+        </div>
+      </div>
+    </div>
+  `;
+  root.appendChild(app);
+
+  /* DATA */
+  let customers = [];
+  let packages = [];
+  let deliveredArchive = [];
+
+  let chartPackages = null;
+  let chartMix = null;
+
+  function nextCustomerId() {
+    return 'C' + String(customers.length + 1).padStart(4, '0');
+  }
+  function nextAbiId() {
+    return 'ABI' + String(packages.length + 1).padStart(5, '0');
+  }
+  function findCustomer(id) {
+    return customers.find(c => c.id === id) || null;
+  }
+  function nowTime() {
+    return new Date().toLocaleString();
+  }
+  function todayDate() {
+    return new Date().toLocaleDateString();
+  }
+  function computeCft(dimStr) {
+    const parts = (dimStr || '').split('x').map(p => parseFloat(p.trim()));
+    if (parts.length !== 3 || parts.some(isNaN)) return '';
+    const cft = (parts[0] * parts[1] * parts[2]) / 1728;
+    return cft.toFixed(2);
+  }
+  function addActivity(text) {
+    const body = document.querySelector('#abiActivityTable tbody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${nowTime()}</td><td>${text}</td>`;
+    body.prepend(tr);
+    while (body.children.length > 6) body.removeChild(body.lastChild);
+  }
+
+  function refreshKpis() {
+    const totalReceived = packages.length;
+    const transit = packages.filter(p => p.status === 'Transit').length;
+    const delivered = packages.filter(p => p.status === 'Delivered').length;
+    const activeCustomers = new Set(packages.map(p => p.customerId)).size;
+
+    document.getElementById('abiKpiReceived').textContent = totalReceived;
+    document.getElementById('abiKpiTransit').textContent = transit;
+    document.getElementById('abiKpiDelivered').textContent = delivered;
+    document.getElementById('abiKpiCustomers').textContent = activeCustomers;
+
+    document.getElementById('abiCardReceived').textContent = totalReceived;
+    document.getElementById('abiCardTransit').textContent = transit;
+    document.getElementById('abiCardDelivered').textContent = delivered;
+
+    refreshCharts();
+  }
+
+  function refreshCharts() {
+    const totalReceived = packages.length;
+    const transit = packages.filter(p => p.status === 'Transit').length;
+    const delivered = packages.filter(p => p.status === 'Delivered').length;
+
+    const air = packages.filter(p => p.freight === 'AIR').length;
+    const ocean = packages.filter(p => p.freight === 'OCEAN').length;
+    const land = packages.filter(p => p.freight === 'LAND').length;
+
+    const ctx1 = document.getElementById('abiPackagesChart').getContext('2d');
+    const ctx2 = document.getElementById('abiMixChart').getContext('2d');
+
+    if (!chartPackages) {
+      chartPackages = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+          labels: ['Received', 'Transit', 'Delivered'],
+          datasets: [{
+            label: 'Packages',
+            data: [totalReceived, transit, delivered],
+            backgroundColor: ['#3B82F6','#F97316','#22C55E'],
+            borderColor: '#111827',
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: { display: true, text: 'Packages Status', color: '#ffffff', font: { size: 12, weight: 'bold' } }
+          },
+          scales: {
+            x: { ticks: { color: '#ffffff' }, grid: { color: 'rgba(148,163,184,0.4)' } },
+            y: { ticks: { color: '#ffffff', stepSize: 1 }, grid: { color: 'rgba(55,65,81,0.6)' }, beginAtZero: true }
+          }
+        }
+      });
+    } else {
+      chartPackages.data.datasets[0].data = [totalReceived, transit, delivered];
+      chartPackages.update();
+    }
+
+    if (!chartMix) {
+      chartMix = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+          labels: ['AIR','OCEAN','LAND'],
+          datasets: [{
+            label: 'Freight Mix',
+            data: [air,ocean,land],
+            backgroundColor: ['#3ABFFD','#1D4ED8','#F97316'],
+            borderColor: '#111827',
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive:true,
+          plugins:{
+            legend:{ position:'bottom', labels:{ color:'#ffffff', boxWidth:10 } },
+            title:{ display:true, text:'Freight Type Distribution', color:'#ffffff', font:{ size:12, weight:'bold'} }
+          },
+          cutout:'55%'
+        }
+      });
+    } else {
+      chartMix.data.datasets[0].data = [air,ocean,land];
+      chartMix.update();
+    }
+  }
+
+  function rebuildCustomerSelects() {
+    const selects = ['rCustomer','sCustomer','pCustomer'];
+    selects.forEach(id => {
+      const el = document.getElementById(id);
+      el.innerHTML = '<option value="">Select...</option>';
+      customers.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = `${c.id} · ${c.name}`;
+        el.appendChild(opt);
+      });
+    });
+  }
+
+  function renderCustomers() {
+    const tbody = document.querySelector('#customersTable tbody');
+    tbody.innerHTML = '';
+    customers.forEach(c => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${c.id}</td>
+        <td>${c.name}</td>
+        <td>${c.type}</td>
+        <td>${c.city || ''}</td>
+        <td>
+          <button class="abi-icon-btn" data-action="edit" data-id="${c.id}">✏️</button>
+          <button class="abi-icon-btn abi-icon-btn-danger" data-action="delete" data-id="${c.id}">🗑️</button>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderReceiving() {
+    const tbody = document.querySelector('#receivingTable tbody');
+    tbody.innerHTML = '';
+    packages.forEach(p => {
+      const cust = findCustomer(p.customerId);
+      const cname = cust ? cust.name : '';
+      const freightClass = p.freight === 'AIR' ? 'abi-badge-air' :
+                           p.freight === 'OCEAN' ? 'abi-badge-ocean' :
+                           'abi-badge-land';
+      const serviceClass = p.service === 'VIP' ? 'abi-badge-vip' :
+                           (p.service === 'PRIO' ? 'abi-badge-prio' : '');
+      const statusClass = p.status === 'Delivered' ? 'abi-badge-ok' : '';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="checkbox" data-abi="${p.abi}"></td>
+        <td>${p.abi}</td>
+        <td>${cname}</td>
+        <td>${p.external}</td>
+        <td><span class="abi-badge ${freightClass}">${p.freight}</span></td>
+        <td><span class="abi-badge ${serviceClass}">${p.service}</span></td>
+        <td><span class="abi-badge ${statusClass}">${p.status}</span></td>
+        <td>${p.weight || ''}</td>
+        <td>${p.cft || ''}</td>
+        <td>
+          <button class="abi-icon-btn" data-action="edit" data-abi="${p.abi}">✏️</button>
+          <button class="abi-icon-btn abi-icon-btn-danger" data-action="delete" data-abi="${p.abi}">🗑️</button>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderSending() {
+    const tbody = document.querySelector('#sendingTable tbody');
+    tbody.innerHTML = '';
+    const custFilter = document.getElementById('sCustomer').value;
+    const freightFilter = document.getElementById('sFreightFilter').value;
+    const serviceFilter = document.getElementById('sServiceFilter').value;
+
+    packages.forEach(p => {
+      if (p.status === 'Delivered') return;
+      if (custFilter && p.customerId !== custFilter) return;
+      if (freightFilter && p.freight !== freightFilter) return;
+      if (serviceFilter && p.service !== serviceFilter) return;
+
+      const cust = findCustomer(p.customerId);
+      const cname = cust ? cust.name : '';
+      const freightClass = p.freight === 'AIR' ? 'abi-badge-air' :
+                           p.freight === 'OCEAN' ? 'abi-badge-ocean' :
+                           'abi-badge-land';
+      const serviceClass = p.service === 'VIP' ? 'abi-badge-vip' :
+                           (p.service === 'PRIO' ? 'abi-badge-prio' : '');
+      const statusClass = p.status === 'Delivered' ? 'abi-badge-ok' : '';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="checkbox" data-abi="${p.abi}"></td>
+        <td>${p.abi}</td>
+        <td>${cname}</td>
+        <td><span class="abi-badge ${freightClass}">${p.freight}</span></td>
+        <td><span class="abi-badge ${serviceClass}">${p.service}</span></td>
+        <td><span class="abi-badge ${statusClass}">${p.status}</span></td>
+        <td>${p.weight || ''}</td>
+        <td>${p.cft || ''}</td>
+        <td><button class="abi-btn abi-btn-small" data-action="label" data-abi="${p.abi}">Label</button></td>
+        <td>
+          <button class="abi-icon-btn" data-action="edit" data-abi="${p.abi}">✏️</button>
+          <button class="abi-icon-btn abi-icon-btn-danger" data-action="delete" data-abi="${p.abi}">🗑️</button>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderPodTable() {
+    const tbody = document.querySelector('#podTable tbody');
+    tbody.innerHTML = '';
+    const custFilter = document.getElementById('pCustomer').value;
+    const serviceFilter = document.getElementById('pService').value;
+    packages.forEach(p => {
+      if (p.status === 'Delivered') return;
+      if (custFilter && p.customerId !== custFilter) return;
+      if (serviceFilter && p.service !== serviceFilter) return;
+
+      const freightClass = p.freight === 'AIR' ? 'abi-badge-air' :
+                           p.freight === 'OCEAN' ? 'abi-badge-ocean' :
+                           'abi-badge-land';
+      const statusClass = p.status === 'Delivered' ? 'abi-badge-ok' : '';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><input type="checkbox" data-abi="${p.abi}"></td>
+        <td>${p.abi}</td>
+        <td><span class="abi-badge ${freightClass}">${p.freight}</span></td>
+        <td>${p.service}</td>
+        <td>${p.weight || ''}</td>
+        <td>${p.cft || ''}</td>
+        <td><span class="abi-badge ${statusClass}">${p.status}</span></td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderArchive() {
+    const tbody = document.querySelector('#archiveTable tbody');
+    tbody.innerHTML = '';
+    deliveredArchive.forEach(a => {
+      const cust = findCustomer(a.customerId);
+      const cname = cust ? cust.name : '';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${a.abi}</td>
+        <td>${cname}</td>
+        <td>${a.freight}</td>
+        <td>${a.service}</td>
+        <td>${a.weight || ''}</td>
+        <td>${a.cft || ''}</td>
+        <td>${a.deliveredOn || ''}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderTracker(query) {
+    const tbody = document.querySelector('#trackerTable tbody');
+    tbody.innerHTML = '';
+    if (!query) return;
+    const q = query.toLowerCase();
+    packages.forEach(p => {
+      const cust = findCustomer(p.customerId);
+      const cname = cust ? cust.name : '';
+      if (
+        p.abi.toLowerCase().includes(q) ||
+        (p.external && p.external.toLowerCase().includes(q)) ||
+        (cname && cname.toLowerCase().includes(q))
+      ) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${p.abi}</td>
+          <td>${cname}</td>
+          <td>${p.external || ''}</td>
+          <td>${p.freight}</td>
+          <td>${p.service}</td>
+          <td>${p.status}</td>`;
+        tbody.appendChild(tr);
+      }
+    });
+  }
+
+  /* NAVIGATION */
+  app.querySelectorAll('.abi-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      app.querySelectorAll('.abi-nav-btn').forEach(b => b.classList.remove('abi-active'));
+      btn.classList.add('abi-active');
+      const tab = btn.getAttribute('data-tab');
+      app.querySelectorAll('.abi-tab-panel').forEach(p => {
+        p.classList.toggle('abi-active', p.getAttribute('data-tab') === tab);
+      });
+      const title = {
+        dashboard: 'Live Warehouse Dashboard',
+        customers: 'Customers',
+        receiving: 'Receiving',
+        sending: 'Sending & Labels',
+        pod: 'Proof of Delivery (POD)',
+        archive: 'Delivered Archive',
+        tracker: 'ABI Tracker'
+      }[tab] || '';
+      const subtitle = {
+        dashboard: 'Overview of packages, customers, and activity.',
+        customers: 'Manage customer registry with edit & delete.',
+        receiving: 'Receive packages into warehouse, auto ABI tracking.',
+        sending: 'Prepare shipments, print labels, and update status.',
+        pod: 'Generate printable POD reports for selected packages.',
+        archive: 'View all completed deliveries.',
+        tracker: 'Track packages by ABI, external number, or customer name.'
+      }[tab] || '';
+      document.getElementById('abiContentTitle').textContent = title;
+      document.getElementById('abiContentSubtitle').textContent = subtitle;
+    });
+  });
+
+  /* THEME TOGGLE */
+  document.getElementById('abiToggleTheme').addEventListener('click', () => {
+    app.classList.toggle('abi-light-theme');
+  });
+
+  /* REFRESH BUTTON */
+  document.getElementById('abiRefreshBtn').addEventListener('click', () => {
+    renderCustomers();
+    renderReceiving();
+    renderSending();
+    renderPodTable();
+    renderArchive();
+    refreshKpis();
+    addActivity('Manual refresh executed.');
+  });
+
+  /* CUSTOMER FORM */
+  const cId = document.getElementById('cId');
+  const cName = document.getElementById('cName');
+  const cType = document.getElementById('cType');
+  const cPhone = document.getElementById('cPhone');
+  const cEmail = document.getElementById('cEmail');
+  const cAddress = document.getElementById('cAddress');
+  const cCity = document.getElementById('cCity');
+  const cNotes = document.getElementById('cNotes');
+
+  function clearCustomerForm() {
+    cId.value = '';
+    cName.value = '';
+    cType.value = 'Regular';
+    cPhone.value = '';
+    cEmail.value = '';
+    cAddress.value = '';
+    cCity.value = '';
+    cNotes.value = '';
+  }
+
+  document.getElementById('cNew').addEventListener('click', clearCustomerForm);
+
+  document.getElementById('cSave').addEventListener('click', () => {
+    if (!cName.value.trim()) { alert('Customer name is required'); return; }
+    if (!cId.value) {
+      const id = nextCustomerId();
+      const obj = {
+        id,
+        name: cName.value.trim(),
+        type: cType.value,
+        phone: cPhone.value.trim(),
+        email: cEmail.value.trim(),
+        address: cAddress.value.trim(),
+        city: cCity.value.trim(),
+        notes: cNotes.value.trim()
+      };
+      customers.push(obj);
+      cId.value = id;
+      addActivity('New customer: ' + obj.name);
+    } else {
+      const existing = findCustomer(cId.value);
+      if (existing) {
+        existing.name = cName.value.trim();
+        existing.type = cType.value;
+        existing.phone = cPhone.value.trim();
+        existing.email = cEmail.value.trim();
+        existing.address = cAddress.value.trim();
+        existing.city = cCity.value.trim();
+        existing.notes = cNotes.value.trim();
+        addActivity('Updated customer: ' + existing.name);
+      }
+    }
+    renderCustomers();
+    rebuildCustomerSelects();
+    refreshKpis();
+  });
+
+  document.getElementById('cDelete').addEventListener('click', () => {
+    if (!cId.value) return;
+    const id = cId.value;
+    customers = customers.filter(c => c.id !== id);
+    addActivity('Deleted customer ' + id);
+    clearCustomerForm();
+    renderCustomers();
+    rebuildCustomerSelects();
+    refreshKpis();
+  });
+
+  document.querySelector('#customersTable').addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+    if (!id) return;
+    if (btn.getAttribute('data-action') === 'edit') {
+      const c = findCustomer(id);
+      if (!c) return;
+      cId.value = c.id;
+      cName.value = c.name;
+      cType.value = c.type;
+      cPhone.value = c.phone || '';
+      cEmail.value = c.email || '';
+      cAddress.value = c.address || '';
+      cCity.value = c.city || '';
+      cNotes.value = c.notes || '';
+    } else if (btn.getAttribute('data-action') === 'delete') {
+      customers = customers.filter(c => c.id !== id);
+      addActivity('Deleted customer ' + id);
+      clearCustomerForm();
+      renderCustomers();
+      rebuildCustomerSelects();
+      refreshKpis();
+    }
+  });
+
+  /* RECEIVING FORM */
+  const rCustomer = document.getElementById('rCustomer');
+  const rExt = document.getElementById('rExt');
+  const rAbi = document.getElementById('rAbi');
+  const rFreight = document.getElementById('rFreight');
+  const rService = document.getElementById('rService');
+  const rStatus = document.getElementById('rStatus');
+  const rWeight = document.getElementById('rWeight');
+  const rBox = document.getElementById('rBox');
+  const rDims = document.getElementById('rDims');
+  const rCft = document.getElementById('rCft');
+  const rNotes = document.getElementById('rNotes');
+
+  rDims.addEventListener('input', () => {
+    rCft.value = computeCft(rDims.value);
+  });
+
+  function clearReceiveForm() {
+    rCustomer.value = '';
+    rExt.value = '';
+    rAbi.value = '';
+    rFreight.value = 'AIR';
+    rService.value = 'SNABB';
+    rStatus.value = 'Warehouse';
+    rWeight.value = '';
+    rBox.value = '';
+    rDims.value = '';
+    rCft.value = '';
+    rNotes.value = '';
+  }
+
+  document.getElementById('rNew').addEventListener('click', clearReceiveForm);
+
+  document.getElementById('rSave').addEventListener('click', () => {
+    if (!rCustomer.value) { alert('Select customer'); return; }
+    if (!rExt.value.trim()) { alert('External tracking required'); return; }
+    let abi = rAbi.value;
+    if (!abi) {
+      abi = nextAbiId();
+      rAbi.value = abi;
+      const pkg = {
+        abi,
+        customerId: rCustomer.value,
+        external: rExt.value.trim(),
+        freight: rFreight.value,
+        service: rService.value,
+        status: rStatus.value,
+        weight: rWeight.value,
+        box: rBox.value.trim(),
+        dims: rDims.value,
+        cft: rCft.value,
+        notes: rNotes.value,
+        createdOn: nowTime()
+      };
+      packages.push(pkg);
+      addActivity('Received package ' + abi);
+    } else {
+      const p = packages.find(x => x.abi === abi);
+      if (p) {
+        p.customerId = rCustomer.value;
+        p.external = rExt.value.trim();
+        p.freight = rFreight.value;
+        p.service = rService.value;
+        p.status = rStatus.value;
+        p.weight = rWeight.value;
+        p.box = rBox.value.trim();
+        p.dims = rDims.value;
+        p.cft = rCft.value;
+        p.notes = rNotes.value;
+        addActivity('Updated package ' + abi);
+      }
+    }
+    renderReceiving();
+    renderSending();
+    renderPodTable();
+    refreshKpis();
+  });
+
+  document.getElementById('rDelete').addEventListener('click', () => {
+    const abi = rAbi.value;
+    if (!abi) return;
+    packages = packages.filter(p => p.abi !== abi);
+    addActivity('Deleted package ' + abi);
+    clearReceiveForm();
+    renderReceiving();
+    renderSending();
+    renderPodTable();
+    refreshKpis();
+  });
+
+  document.querySelector('#receivingTable').addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const abi = btn.getAttribute('data-abi');
+    if (!abi) return;
+    const p = packages.find(x => x.abi === abi);
+    if (!p) return;
+
+    if (btn.getAttribute('data-action') === 'edit') {
+      rCustomer.value = p.customerId;
+      rExt.value = p.external;
+      rAbi.value = p.abi;
+      rFreight.value = p.freight;
+      rService.value = p.service;
+      rStatus.value = p.status;
+      rWeight.value = p.weight;
+      rBox.value = p.box || '';
+      rDims.value = p.dims;
+      rCft.value = p.cft;
+      rNotes.value = p.notes || '';
+      app.querySelector('[data-tab="receiving"]').click();
+    } else if (btn.getAttribute('data-action') === 'delete') {
+      packages = packages.filter(x => x.abi !== abi);
+      addActivity('Deleted package ' + abi);
+      clearReceiveForm();
+      renderReceiving();
+      renderSending();
+      renderPodTable();
+      refreshKpis();
+    }
+  });
+
+  /* SENDING & LABELS */
+  document.getElementById('sCustomer').addEventListener('change', renderSending);
+  document.getElementById('sFreightFilter').addEventListener('change', renderSending);
+  document.getElementById('sServiceFilter').addEventListener('change', renderSending);
+
+  document.getElementById('sMarkTransit').addEventListener('click', () => {
+    const selected = Array.from(document.querySelectorAll('#sendingTable tbody input[type=checkbox]:checked')).map(cb => cb.getAttribute('data-abi'));
+    if (!selected.length) { alert('Select packages'); return; }
+    packages.forEach(p => { if (selected.includes(p.abi)) p.status = 'Transit'; });
+    addActivity('Marked in transit: ' + selected.join(', '));
+    renderReceiving();
+    renderSending();
+    renderPodTable();
+    refreshKpis();
+  });
+
+  document.getElementById('sMarkDelivered').addEventListener('click', () => {
+    const selected = Array.from(document.querySelectorAll('#sendingTable tbody input[type=checkbox]:checked')).map(cb => cb.getAttribute('data-abi'));
+    if (!selected.length) { alert('Select packages'); return; }
+    const ts = nowTime();
+    packages.forEach(p => {
+      if (selected.includes(p.abi)) {
+        p.status = 'Delivered';
+        deliveredArchive.push({...p, deliveredOn: ts});
+      }
+    });
+    addActivity('Marked delivered: ' + selected.join(', '));
+    renderReceiving();
+    renderSending();
+    renderPodTable();
+    renderArchive();
+    refreshKpis();
+  });
+
+  document.getElementById('sPrintSelectedLabels').addEventListener('click', () => {
+    const selected = Array.from(document.querySelectorAll('#sendingTable tbody input[type=checkbox]:checked')).map(cb => cb.getAttribute('data-abi'));
+    if (!selected.length) { alert('Select packages'); return; }
+    openLabelModalForAbi(selected[0]);
+  });
+
+  document.querySelector('#sendingTable').addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const abi = btn.getAttribute('data-abi');
+    if (!abi) return;
+    const p = packages.find(x => x.abi === abi);
+    if (!p) return;
+
+    if (btn.getAttribute('data-action') === 'label') {
+      openLabelModalForAbi(abi);
+    } else if (btn.getAttribute('data-action') === 'edit') {
+      rCustomer.value = p.customerId;
+      rExt.value = p.external;
+      rAbi.value = p.abi;
+      rFreight.value = p.freight;
+      rService.value = p.service;
+      rStatus.value = p.status;
+      rWeight.value = p.weight;
+      rBox.value = p.box || '';
+      rDims.value = p.dims;
+      rCft.value = p.cft;
+      rNotes.value = p.notes || '';
+      app.querySelector('[data-tab="receiving"]').click();
+    } else if (btn.getAttribute('data-action') === 'delete') {
+      packages = packages.filter(x => x.abi !== abi);
+      addActivity('Deleted package ' + abi);
+      renderReceiving();
+      renderSending();
+      renderPodTable();
+      refreshKpis();
+    }
+  });
+
+  /* POD */
+  document.getElementById('pCustomer').addEventListener('change', renderPodTable);
+  document.getElementById('pService').addEventListener('change', renderPodTable);
+
+  document.getElementById('pPrintPod').addEventListener('click', () => {
+    const selectedAbi = Array.from(document.querySelectorAll('#podTable tbody input[type=checkbox]:checked')).map(cb => cb.getAttribute('data-abi'));
+    if (!selectedAbi.length) { alert('Select packages'); return; }
+
+    const rows = selectedAbi.map(abi => {
+      const p = packages.find(x => x.abi === abi);
+      const cust = p ? findCustomer(p.customerId) : null;
+      return {p, cust};
+    }).filter(x => x.p);
+
+    const htmlRows = rows.map(({p, cust}) => `
+      <tr>
+        <td>${p.abi}</td>
+        <td>${cust ? cust.name : ''}</td>
+        <td>${p.freight}</td>
+        <td>${p.service}</td>
+        <td>${p.weight || ''}</td>
+        <td>${p.cft || ''}</td>
+        <td>${p.status}</td>
+      </tr>`).join('');
+
+    const win = window.open('', '_blank');
+    win.document.write(`
+      <html><head><title>POD</title></head>
+      <body>
+        <div class="abi-pod-sheet">
+          <div class="abi-pod-header">
+            <div>
+              <img class="abi-pod-logo" src="https://static.wixstatic.com/media/400daf_9401f2cc240047f985346922a9f6ef8d~mv2.png">
+            </div>
+            <div>
+              <div class="abi-pod-title">Proof Of Delivery (POD)</div>
+              <div>ABI LOGISTIC SERVICES LLC</div>
+              <div>Efficiency Delivered, Success Achieved!</div>
+            </div>
+          </div>
+          <table class="abi-pod-table">
+            <thead>
+              <tr><th>ABI</th><th>Customer</th><th>Freight</th><th>Service</th><th>LBS</th><th>CFT</th><th>Status</th></tr>
+            </thead>
+            <tbody>${htmlRows}</tbody>
+          </table>
+          <div style="margin-top:10px;font-size:10px;">
+            <div>Date: ${todayDate()}</div>
+            <div style="margin-top:18px;">Customer Signature: ________________________________</div>
+          </div>
+        </div>
+        <style>
+          body {margin:0;font-family:system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;}
+          .abi-pod-sheet {background:#ffffff;color:#020617;padding:10px;border-radius:12px;border:1px solid #111827;font-size:11px;}
+          .abi-pod-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+          .abi-pod-logo{width:70px;height:35px;object-fit:contain;}
+          .abi-pod-title{font-size:13px;font-weight:700;}
+          .abi-pod-table{width:100%;border-collapse:collapse;font-size:10px;}
+          .abi-pod-table th,.abi-pod-table td{border:1px solid #111827;padding:3px 4px;}
+        </style>
+      </body></html>
+    `);
+    win.document.close();
+    win.focus();
+    win.print();
+  });
+
+  /* TRACKER */
+  document.getElementById('tQuery').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') renderTracker(e.target.value.trim());
+  });
+
+  /* LABEL MODAL */
+  const modalBackdrop = document.getElementById('abiLabelModalBackdrop');
+  const labelSheet = document.getElementById('abiLabelSheet');
+
+  function openLabelModalForAbi(abi) {
+    const p = packages.find(x => x.abi === abi);
+    if (!p) return;
+    const cust = findCustomer(p.customerId);
+
+    document.getElementById('lblType').textContent =
+      (p.freight === 'AIR' ? 'AIR Cargo' : p.freight + ' Cargo');
+    document.getElementById('lblDest').textContent = 'Paramaribo, Suriname';
+    document.getElementById('lblCust').textContent = cust ? cust.name : '';
+    document.getElementById('lblAddress').textContent =
+      (cust && cust.address) ? cust.address : 'Paramaribo, Suriname';
+
+    let weightText = p.weight ? p.weight + ' LBS' : 'LBS';
+    if (p.freight === 'AIR' && p.cft) {
+      weightText = (p.weight ? p.weight + ' LBS / ' : '') + p.cft + ' CFT';
+    }
+    document.getElementById('lblWeight').textContent = weightText;
+
+    document.getElementById('lblBox').textContent = p.box || 'Box 1 of 1';
+    document.getElementById('lblAbiCode').textContent = abi;
+    document.getElementById('lblAbiText').textContent = abi;
+
+    new QRious({
+      element: document.getElementById('abiLabelQr'),
+      value: abi,
+      size: 80
+    });
+
+    JsBarcode("#abiLabelBarcode", abi, {
+      format: "code128",
+      lineColor: "#000000",
+      width: 1.4,
+      height: 40,
+      displayValue: false,
+      margin: 0
+    });
+
+    modalBackdrop.classList.add('abi-visible');
+  }
+
+  document.getElementById('abiLabelClose').addEventListener('click', () => {
+    modalBackdrop.classList.remove('abi-visible');
+  });
+
+  document.getElementById('abiLabelPrint').addEventListener('click', () => {
+    const qrCanvas = document.getElementById('abiLabelQr');
+    let qrImgHtml = '';
+    try {
+      const dataUrl = qrCanvas.toDataURL('image/png');
+      qrImgHtml = `<img src="${dataUrl}" style="width:${qrCanvas.width}px;height:${qrCanvas.height}px;">`;
+    } catch (e) {
+      qrImgHtml = qrCanvas.outerHTML;
+    }
+
+    const clone = labelSheet.cloneNode(true);
+    const cloneQr = clone.querySelector('#abiLabelQr');
+    if (cloneQr) {
+      cloneQr.outerHTML = qrImgHtml;
+    }
+
+    const html = clone.outerHTML;
+    const win = window.open('', '_blank');
+    win.document.write(`
+      <html><head><title>Label</title></head>
+      <body>${html}
+      <style>
+        body {margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;}
+        .abi-label-sheet{background:#ffffff;color:#020617;border-radius:14px;border:2px solid #111827;padding:12px;font-size:11px;width:360px;margin:0 auto;}
+        .abi-label-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+        .abi-label-header-left{display:flex;flex-direction:column;gap:2px;font-size:11px;text-align:center;align-items:center;}
+        .abi-label-logo{width:82px;height:38px;object-fit:contain;}
+        .abi-label-section-title{font-weight:700;font-size:11px;margin-top:6px;margin-bottom:4px;border-top:1px solid #d4d4d8;padding-top:3px;}
+        .abi-label-table{width:100%;border-collapse:collapse;font-size:10px;}
+        .abi-label-table td{border:1px solid #d4d4d8;padding:2px 4px;}
+        .abi-label-tracking{text-align:center;margin-top:4px;font-weight:700;letter-spacing:0.25em;}
+        .abi-label-footer{text-align:center;margin-top:4px;font-size:10px;}
+      </style>
+      </body></html>`);
+    win.document.close();
+    win.focus();
+    win.print();
+  });
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) modalBackdrop.classList.remove('abi-visible');
+  });
+
+  /* INIT */
+  addActivity('Console loaded.');
+  refreshKpis();
+})();
+</script>
