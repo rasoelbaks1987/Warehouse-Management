@@ -1924,3 +1924,60 @@
   refreshKpis();
 })();
 </script>
+/* DATA */
+let customers = [];
+let packages = [];
+let deliveredArchive = [];
+/* DATA + LOCAL STORAGE */
+const ABI_STORAGE_KEY = 'ABI_WAREHOUSE_STATE_V1';
+
+let customers = [];
+let packages = [];
+let deliveredArchive = [];
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(ABI_STORAGE_KEY);
+    if (!raw) return;
+
+    const data = JSON.parse(raw);
+    customers = Array.isArray(data.customers) ? data.customers : [];
+    packages = Array.isArray(data.packages) ? data.packages : [];
+    deliveredArchive = Array.isArray(data.deliveredArchive) ? data.deliveredArchive : [];
+  } catch (e) {
+    console.error('LOAD ERROR', e);
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(
+      ABI_STORAGE_KEY,
+      JSON.stringify({ customers, packages, deliveredArchive })
+    );
+  } catch (e) {
+    console.error('SAVE ERROR', e);
+  }
+}
+
+// Load immediately when script starts
+loadState();
+saveState();
+renderCustomers();
+rebuildCustomerSelects();
+refreshKpis();
+saveState();   // <-- add this
+renderCustomers();
+rebuildCustomerSelects();
+refreshKpis();
+saveState();
+refreshKpis();
+saveState();
+// Render saved data on page load
+renderCustomers();
+rebuildCustomerSelects();
+renderReceiving();
+renderSending();
+renderPodTable();
+renderArchive();
+refreshKpis();
